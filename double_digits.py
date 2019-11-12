@@ -14,7 +14,8 @@ wrong_image_path = 'pictures/wrong/'
 correct_image_list = os.listdir(path / correct_image_path)
 wrong_image_list = os.listdir(path / wrong_image_path)
 
-right_answer_messages = ['Freaking awesome!  You got it right, I knew you could do it!!!', 
+right_answer_messages = ["You are so smart, that's how I KNOW you are definitely my daughter! :-)", 
+                        'Freaking awesome!  You got it right, I knew you could do it!!!', 
                         'Awesome-sauce!', 'You rock!!!',
                         'You are a multiplication GENIUS!!!',
                         'How did you get so smart?!?!',
