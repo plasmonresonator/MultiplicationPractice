@@ -8,18 +8,12 @@ from credentials import app_password, matt_email, maddie_email, krista_email
 print(os.getcwd())
 
 path = Path(os.getcwd())
-# path = 'c:\\users\\212330207\\desktop\\'
 sound_path = 'c:\\windows\\media\\'
 correct_image_path = 'pictures/correct/'
-# correct_image_path = 'c:\\users\\212330207\\desktop\\cat pictures\\correct\\'
 wrong_image_path = 'pictures/wrong/'
-# wrong_image_path = 'c:\\users\\212330207\\desktop\\cat pictures\\wrong\\'
 correct_image_list = os.listdir(path / correct_image_path)
-# correct_image_list = os.listdir(correct_image_path)
 wrong_image_list = os.listdir(path / wrong_image_path)
-# wrong_image_list = os.listdir(wrong_image_path) 
 
-greeting_messages = ['Hello, Meatbag!']
 right_answer_messages = ['Freaking awesome!  You got it right, I knew you could do it!!!', 
                         'Awesome-sauce!', 'You rock!!!',
                         'You are a multiplication GENIUS!!!',
@@ -36,13 +30,6 @@ wrong_answer_messages = ['Oops! Either you got the wrong answer, or Daddy didn\'
                         'Bummer, you missed that one, now you have to look at dog poop again!!! :-p ',
                         ]
 
-# common_numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
-# test_numbers = []
-# practice_selection = []
-# all_problems = []
-# correct = []
-# wrong = []
-# wrong2 = []
 
 def play_correct_sound():
     os.chdir(sound_path)
@@ -169,7 +156,7 @@ while keep_playing == str.lower('y'):
     starttime = start.strftime('%Y-%m-%d_%H_%M_%S')
     if not os.path.exists('mathresultfiles'):
         os.mkdir('mathresultfiles')
-    indiv_path = path / 'mathresultfiles' #c:\\users\\212330207\\desktop\\mathresultfiles\\'
+    indiv_path = path / 'mathresultfiles'
     indiv_filename = os.path.join(indiv_path, starttime + '.txt')
 
     with open(indiv_filename, 'a+') as f:
@@ -190,9 +177,6 @@ while keep_playing == str.lower('y'):
                     get_problem(current_problem, x, 1)
                 except:
                     all_problems.append(current_problem)
-                    # f.write(f"\n****ERROR IN CODE****")
-                    # f.write(f"\t{e}\n")
-                    # f.write(f"problem added to wrong list by default")
         
         if len(wrong) >=1:
             f.write('*********************************')
@@ -206,10 +190,6 @@ while keep_playing == str.lower('y'):
                     get_problem(current_problem, x, 2)
                 except Exception as e:
                     wrong.append(current_problem)
-                    # f.write(f"\n****ERROR IN CODE****")
-                    # f.write(f"\t{e}\n")
-                    # f.write(f"problem added to error list by default")
-
 
         end = datetime.now()
         duration = end - start
@@ -234,74 +214,6 @@ while keep_playing == str.lower('y'):
     except Exception as e:
         print(f"Your results didn't sent for some reason.\n\n{e}\n\n\tYou can go to the folder: {os.getcwd()} and find your results file named {filename} if you want to.")
 
-
-
-
-
     keep_playing = input('Do you want to play again? (Type y or n and then press enter)\n')
 
 print('Thanks for playing!!!  Goodbye!')
-
-'''
-
-    with open(indiv_filename, 'a+') as ff:
-        with open('Maddie multiplaction results.txt', 'a+') as f:
-            print('OK, ' + str.title(name) + ', let\'s do it!!!\n\n')
-            f.write(f'Level {level} start time: {starttime}\n')
-            ff.write(f'Level {level} start time: {starttime}\n')
-            
-            for i in range(problems):
-                num1 = int(random.choice(values))
-                num2 = int(random.choice(common))
-                answer = num1 * num2
-                problem = 'What is ' + str(num1) + ' x ' + str(num2) + ' ?\t '
-                while True:
-                    x = input(problem)
-                    try:
-                        int(x)
-                        break
-                    except ValueError:
-                        print("\nThat's not a number silly!!! Try typing your answer again!!! :-)")
-
-                if int(x) == int(answer):
-                    print(str(random.choice(right_answer_messages)) + '\n')
-                    display_image('correct', i)
-                    right.append(i)
-                    f.write(f'Problem {i}: {problem} \tCorrect answer is {answer}.  Your answer was {x}.  CORRECT\n')
-                    ff.write(f'Problem {i}: {problem} \tCorrect answer is {answer}.  Your answer was {x}.  CORRECT\n')
-                elif int(x) != int(answer):
-                    print('\nOops, you missed it that time.  Let\'s try it one more time!')
-                    x = input(problem)
-                    if int(x) == int(answer):
-                        print(str(random.choice(right_answer_messages)) + '\n')
-                        right.append(i)
-                        f.write(f'Problem {i}: {problem} \tCorrect answer is {answer}.  Your answer was {x}.  CORRECT (2nd try)\n')
-                        ff.write(f'Problem {i}: {problem} \tCorrect answer is {answer}.  Your answer was {x}.  CORRECT (2nd try)\n')
-                    else:
-                        print(str(random.choice(wrong_answer_messages)) + '\n')
-                        print(f'The correct answer was {num1} x {num2} = {answer}')
-                        display_image('wrong', i)
-                        wrong.append(i)
-                        f.write(f'Problem {i}: {problem} \tCorrect answer is {answer}.  Your answer was {x}.  WRONG\n')
-                        ff.write(f'Problem {i}: {problem} \tCorrect answer is {answer}.  Your answer was {x}.  WRONG\n')
-
-                total.append(i)
-            end = datetime.now()
-            duration = end - start
-            time_message = '\nTotal time to answer 10 problems: ' + str(duration) + ' seconds.\n'
-            accuracy = 'You answered ' + str(len(right)) + ' out of 10 questions correctly.\n'
-            linebreak = '\n ################################################ \n\n'
-
-            print(time_message)
-            print(accuracy)
-            print(linebreak)
-            f.write(time_message)
-            f.write(accuracy)
-            f.write(linebreak)
-            ff.write(time_message)
-            ff.write(accuracy)
-            ff.write(linebreak)
-    # except Exception as e:
-    #   print(f'An error occurred with the message: \n\t{e}\nPlease let Daddy know!')
-
-'''
